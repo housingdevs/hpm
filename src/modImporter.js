@@ -5,8 +5,7 @@ export function installModule(atlas, moduleName) {
     if (!moduleName)        return ChatLib.chat('&cPlease input a module name!')
     if (!atlas[moduleName.split(':')[0]]) return ChatLib.chat('&cThis module doesn\'t exist!') 
 
-    let url = atlas[moduleName].stable
-    if (atlas[moduleName].endsWith(':beta')) url = atlas[moduleName].beta || atlas[moduleName].stable
+    let url = atlas[moduleName].releases[moduleName.split(':')[1] || '$main'] // Multi version support
 
     const tempId = Date.now()
     FileUtilities.urlToFile(url, `./config/ChatTriggers/modules/hpm-temp-${tempId}.zip`, 5000, 5000)
@@ -22,6 +21,7 @@ export function installModule(atlas, moduleName) {
             
             FileLib.delete(`./config/ChatTriggers/modules/hpm-temp-${tempId}.zip`)
             ChatLib.chat(`&aImported ${atlas[moduleName].name}!`)
+            ChatLib.chat(`&6&lWARN&8 - &7This release has been marked as unstable!`)
             ChatLib.command('ct load', true)
         }
     }).setDelay(1)
