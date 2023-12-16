@@ -3,10 +3,13 @@ import FileUtilities from './modules/FileUtilities/main';
 export function installModule(atlas, moduleName) {
     if (!atlas.loaded)      return ChatLib.chat('&cHPM Atlas hasn\'t loaded yet! Please wait!')
     if (!moduleName)        return ChatLib.chat('&cPlease input a module name!')
-    if (!atlas[moduleName]) return ChatLib.chat('&cThis module doesn\'t exist!') 
+    if (!atlas[moduleName.split(':')[0]]) return ChatLib.chat('&cThis module doesn\'t exist!') 
+
+    let url = atlas[moduleName].stable
+    if (atlas[moduleName].endsWith(':beta')) url = atlas[moduleName].beta || atlas[moduleName].stable
 
     const tempId = Date.now()
-    FileUtilities.urlToFile(atlas[moduleName].url, `./config/ChatTriggers/modules/hpm-temp-${tempId}.zip`, 5000, 5000)
+    FileUtilities.urlToFile(url, `./config/ChatTriggers/modules/hpm-temp-${tempId}.zip`, 5000, 5000)
 
     const suicideCheck = register('step', () => {
         if (FileUtilities.exists(`./config/ChatTriggers/modules/hpm-temp-${tempId}.zip`)) {

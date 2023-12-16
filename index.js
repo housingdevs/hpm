@@ -1,4 +1,4 @@
-import { installModule } from './commandImport';
+import { installModule } from './src/modImporter';
 import axios from './modules/axios';
 
 const helpMessage = new Message([
