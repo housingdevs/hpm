@@ -8,7 +8,7 @@ export function installModule(atlas, moduleName) {
     moduleName = moduleName.split(':')
     if (!atlas[moduleName[0]]) return ChatLib.chat('&cThis module doesn\'t exist!') 
 
-    let release = atlas[moduleName].releases[moduleName[1] || '$main'] // Multi version support
+    let release = atlas[moduleName].releases[moduleName[1] || '$default'] // Multi version support
 
     const tempId = Date.now()
     FileUtilities.urlToFile(release.url, `./config/ChatTriggers/modules/hpm-temp-${tempId}.zip`, 5000, 5000)

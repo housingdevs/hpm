@@ -8,7 +8,8 @@ Add functions, ChatTriggers modules & more! It's an all-in-one Housing importer!
 | Command              | Purpose
 | -------------------- | ------------------------------------------------------
 | `/hpm`               | Opens a list of all commands
-| `/hpm add <package>` | Adds a package from the HPM Action Library, these are curated heavily
+| ~~`/hpm add <package>`~~ | ~~Adds a package from the HPM Action Library, these are curated heavily~~
+| `/hpm atlas`         | Browse the mod atlas to manage your mods!
 | `/hpm import <mod>`  | Checks the mod atlas and downloads the mod if it's on there
 | `/hpm reload`        | Fetches the updated version of the mod link atlas (you won't need this, unless imports break)
 

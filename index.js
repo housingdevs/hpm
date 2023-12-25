@@ -1,13 +1,15 @@
 import { installModule } from './src/modImporter';
 import axios from './modules/axios';
+import { formatAtlasToChat } from './src/modExplorer';
+import { viewModReleases } from './src/modReleases';
 
 const helpMessage = new Message([
     '\n',
     '&7&l■ HPM Commands\n',
-    '&7 | &e/hpm reload &8- &7Reload HPM\'s atlas to check for new mods\n',
-    '&7 | &e/hpm import &8- &7Import a ChatTriggers module from our atlas\n',
-    '&7 | &e&m/hpm install&8 -&7 &mInstall a HPM Package from our Action Library\n',
-    ''
+    '&7 | &e/hpm atlas&8 - &7Manage your HPM Atlas modules\n',
+    '&7 | &e/hpm import&8 - &7Import a HPM Atlas module\n',
+    '&7 | &e/hpm delete&8 - &7Delete a HPM Atlas module\n',
+    '&7 | &e&m/hpm package&8 - &7&mImport an Action Package\n'
 ])
 
 let atlas = { loaded: false };
@@ -35,11 +37,20 @@ register('command', (subcommand, ...args) => {
         case 'import':
             installModule(atlas, args[0]?.toLowerCase() || undefined)
         break;
+        case 'atlas':
+            if (!args[0]) return formatAtlasToChat(atlas)
+            viewModReleases(atlas, args[0])
+        break;
         case 'reload':
             ChatLib.chat('&cReloading HPM...')
             initialise(true)
         break;
         case 'delete':
+            if (args[0]=="hpm") return ChatLib.chat(new Message([
+                new TextComponent("\n&cAre you sure you want to delete HPM? You'll lose out on critical patches, easy installing of modules & more!\n"),
+                new TextComponent('&c&lDELETE HPM\n').setHover('show_text','&cDelete HPM').setClick('run_command','/ct delete hpm')
+            ]))
+
             ChatLib.command(`ct delete ${...args}`)
         break;
         default:
