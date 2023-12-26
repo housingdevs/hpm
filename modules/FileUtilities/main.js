@@ -744,9 +744,8 @@ export default class FileUtilities {
   static getExtension(target) {
     return target.split(".").pop();
   }
+
 }
-
-
 
 
 export function unGZIP(target, destination) {
