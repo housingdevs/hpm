@@ -6,7 +6,7 @@ const JavaPaths = Java.type('java.nio.file.Paths')
 const JavaStandardCopyOption = Java.type('java.nio.file.StandardCopyOption')
 
 function mergeDirectories(source, destination) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => { try {
         if (!JavaFiles.exists(destination)) JavaFiles.createDirectories(destination)
     
         const sourceItems = JavaFiles.list(source)
@@ -22,7 +22,7 @@ function mergeDirectories(source, destination) {
         })
 
         resolve();
-    })
+    } catch(err) reject(err) })
 }
 
 // im beginnin' to feel like a jank god, jank god.

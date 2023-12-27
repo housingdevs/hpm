@@ -15,7 +15,7 @@ Add functions, ChatTriggers modules & more! It's an all-in-one Housing importer!
 
 ## Installation
 > [!IMPORTANT]  
-> You will need [Forge 1.8.9](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.8.9.html) and [ChatTriggers](https://www.chattriggers.com/) to use HPM. Modern versions are currently unsupported.
+> Install mods [Forge 1.8.9](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.8.9.html) and [ChatTriggers](https://www.chattriggers.com/) before you attempt to use HPM. Modern versions are currently unsupported.
 
 > [!NOTE]  
 > Manual reinstalling is not needed to update HPM. Just type /hpm import hpm to update!
