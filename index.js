@@ -16,6 +16,8 @@ let atlas = { loaded: false };
 
 // initialisation
 function initialise(loud = false) {
+    const metadata = JSON.parse(FileLib.read('hpm','metadata.json'))
+
     axios.get('https://dev.ixnoah.live/mods/hpm/atlas.json')
     .then((response) => {
         atlas = response.data
@@ -26,6 +28,19 @@ function initialise(loud = false) {
         .catch((err) => {
             ChatLib.chat('&c&lERROR! &eHPM has encountered an error while fetching the atlas! See the console for more info!')
             return err
+    })
+
+    // Check for HPM updates
+    axios.get('https://raw.githubusercontent.com/housingdevs/hpm/main/metadata.json')
+    .then(response => {
+        if (response.data.version > JSON.parse(metadata.version)) {
+            ChatLib.chat(new Message([
+                '&aUpdate available for HPM! ',
+                new TextComponent('&e&lUPDATE')
+                    .setClick('run_command', '/hpm import hpm')
+                    .setHover('show_text',   '&eClick to update!')
+            ]))
+        }
     })
 }
 

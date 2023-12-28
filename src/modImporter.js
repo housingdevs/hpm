@@ -22,7 +22,7 @@ function mergeDirectories(source, destination) {
         })
 
         resolve();
-    } catch(err) reject(err) })
+    } catch(err) {reject(err)} })
 }
 
 // im beginnin' to feel like a jank god, jank god.
