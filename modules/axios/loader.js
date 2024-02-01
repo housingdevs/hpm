@@ -34,7 +34,7 @@ function loadCertificates() {
     keyStore.load(Files.newInputStream(ksPath), new JavaString("changeit").toCharArray())
     let cf = CertificateFactory.getInstance("X.509")
     for (let i of certificates) {
-        let pathStr = `${Config.modulesFolder}/axios/src/certificates/${i}`
+        let pathStr = `${Config.modulesFolder}/hpm/modules/axios/src/certificates/${i}`
         let path = Paths.get(pathStr)
         let data = Files.readAllBytes(path)
         let cert = cf.generateCertificate(new ByteArrayInputStream(data))
