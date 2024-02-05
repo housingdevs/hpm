@@ -6,5 +6,5 @@
     "helpMessage": "&7Housing Packet Manager has been installed! Type &e/hpm&7 for commands!",
 
     "entry": "index.js",
-    "version": "0.5.0"
+    "version": "0.3.0"
 }
