@@ -1,0 +1,10 @@
+{
+    "name": "hpm",
+    "creator": "HousingDevs",
+
+    "description": "A packet manager for Hypixel Housing.",
+    "helpMessage": "&7Housing Packet Manager has been installed! Type &e/hpm&7 for commands!",
+
+    "entry": "index.js",
+    "version": "0.5.0"
+}
