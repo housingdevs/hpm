@@ -39,7 +39,7 @@ export function parseOptions(options) {
     }
 
     if (options.useDefaultUserAgent && !options.headers.get("user-agent")) {
-        options.headers.set("user-agent", `axios/${JSON.parse(FileLib.read(Config.modulesFolder + "/axios/metadata.json")).version} (ChatTriggers)`)
+        options.headers.set("user-agent", `Housing Package Manager (ChatTriggers)`)
     }
 
     return options
