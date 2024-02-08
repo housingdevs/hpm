@@ -2,6 +2,12 @@ import { createPagedMenu } from "../tools/createPagedMenu";
 import { Atlas } from "../tools/getAtlas";
 import { importModule } from "../tools/importModule";
 
+const SORT_ORDER = {
+    minecart: 0,
+    command_block_minecart: 1,
+    chest_minecart: 2
+};
+
 let exploreMenu = []
 
 function formatAtlas() {
@@ -9,14 +15,16 @@ function formatAtlas() {
 
     let modItems = []
 
-    Object.values(Atlas.data).forEach(modData => {
+    for (const modData of Object.values(Atlas.data)) {
         let itemType = 'minecart'
-        
-        if (FileLib.exists(`${Config.modulesFolder}/${modData.name}`)) itemType = 'command_block_minecart'
 
+        if (FileLib.exists(`${Config.modulesFolder}/${modData.name}`)) itemType = 'command_block_minecart'
+        if ( itemType=='command_block_minecart' && modData.isLibrary ) itemType = 'chest_minecart'
+        if ( itemType=='minecart' && modData.isLibrary ) continue; // we don't want to show libraries in the explore menu unless they're already imported
+        
         modItems.push({
             item: new Item(itemType)
-                .setName('§a'+modData.name)
+                .setName('&a'+modData.name)
                 .setLore(
                     [
                         '&7Creator: &b' + modData.creator,
@@ -28,13 +36,21 @@ function formatAtlas() {
 
             leftClick() {
                 Client.currentGui.close()
-                Client.setCurrentChatMessage('/hpm import '+modData.name)
+                Client.setCurrentChatMessage('/hpm import ' + modData.name)
             }
         })
-    })
+    }
 
-    modItems = modItems.sort((a,b) => (a.item.getName() > b.item.getName()) ? 1 : ((b.item.getName() > a.item.getName()) ? -1 : 0))
-    modItems = modItems.sort((a,b) => a.item.getID() - b.item.getID());
+    modItems.sort((a, b) => {
+        const itemTypeA = a.item.getRegistryName().split(':')[1];
+        const itemTypeB = b.item.getRegistryName().split(':')[1];
+
+        if (itemTypeA !== itemTypeB) {
+            return SORT_ORDER[itemTypeA] - SORT_ORDER[itemTypeB];
+        }
+
+        return a.item.getName().localeCompare(b.item.getName());
+    });
 
     exploreMenu = createPagedMenu(modItems, 'Explore Modules')
 }
