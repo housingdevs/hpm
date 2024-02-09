@@ -1,4 +1,4 @@
-import { openExploreMenu } from "./commands/explore";
+import { openExploreMenu } from "./commands/exploreMods";
 import { importModuleCommand } from "./commands/import";
 
 const commands = {
