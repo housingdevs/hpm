@@ -13,7 +13,7 @@ let exploreMenu = []
 function formatAtlas() {
     if (!Atlas.loaded) return ChatLib.chat("&cHPM hasn't loaded yet!")
 
-    let modItems = []
+    const modItems = []
 
     for (const modData of Object.values(Atlas.data)) {
         let itemType = 'minecart'
@@ -22,6 +22,8 @@ function formatAtlas() {
         if ( itemType=='command_block_minecart' && modData.isLibrary ) itemType = 'chest_minecart'
         if ( itemType=='minecart' && modData.isLibrary ) continue; // we don't want to show libraries in the explore menu unless they're already imported
         
+        const modName = modData.name.toLowerCase() // For some GOD FORSAKEN reason, the leftclick function always just uses the last mod's name. I'm not sure why, but this fixes it.
+
         modItems.push({
             item: new Item(itemType)
                 .setName('&a'+modData.name)
@@ -36,7 +38,7 @@ function formatAtlas() {
 
             leftClick() {
                 Client.currentGui.close()
-                Client.setCurrentChatMessage('/hpm import ' + modData.name)
+                Client.setCurrentChatMessage('/hpm import ' + modName)
             }
         })
     }
